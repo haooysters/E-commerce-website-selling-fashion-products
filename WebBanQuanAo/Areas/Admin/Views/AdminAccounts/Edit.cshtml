@@ -1,0 +1,82 @@
+﻿@model WebBanQuanAo.Models.Account
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Index" style='color:blueviolet'>Quản lý tài khoản</a>
+                <span class="breadcrumb-item active">Chỉnh sửa tài khoản</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-7 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col">
+                        <h4 class="card-title" style="color: black; text-align: center">Chỉnh sửa thông tin tài khoản</h4>
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @*Người dùng không chỉnh sửa tự động lấy lại giá trị cũ*@
+                            <input type="hidden" asp-for="AccountId" />
+                            <input type="hidden" asp-for="Password" />
+                            <input type="hidden" asp-for="Salt" />
+                            <input type="hidden" asp-for="CreateDate" />
+                            @*<input type="hidden" asp-for="Address" />*@
+                            <div class="form-group">
+                                <label asp-for="FullName" class="control-label">Họ tên</label>
+                                <input asp-for="FullName" class="form-control" required/>
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Phone" class="control-label">Số điện thoại</label>
+                                <input asp-for="Phone" class="form-control" required/>
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label">Email</label>
+                                <input asp-for="Email" class="form-control" required/>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Address" class="control-label">Địa chỉ</label>
+                                <input asp-for="Address" class="form-control" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="RoleId" class="control-label">Vai trò</label>
+                                <select asp-for="RoleId" class="form-control" asp-items="ViewBag.Quyen"></select>
+                                <span asp-validation-for="RoleId" class="text-danger"></span>
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <input type="checkbox" @Html.CheckBox("Active")
+                                <label>Trạng thái</label>
+
+                            </div>
+                            <div class="form-group" style="text-align:center">
+                                <div class="template-demo mt-2">
+                                    <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                                        <i class="mdi mdi-file-check btn-icon-prepend"></i> Lưu
+                                    </button>
+                                    <button type="reset" class="btn btn-outline-warning btn-icon-text">
+                                        <i class="mdi mdi-reload btn-icon-prepend"></i> Trở lại
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

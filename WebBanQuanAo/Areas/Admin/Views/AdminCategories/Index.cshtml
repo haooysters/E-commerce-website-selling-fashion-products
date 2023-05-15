@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebBanQuanAo.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <span class="breadcrumb-item active">Danh mục sản phẩm</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <a class="btn btn-inverse-primary btn-fw btn-md" asp-action="Create"><i class="mdi mdi-folder-plus btn-icon-append"></i>  Tạo mới</a>
+                    <table class="table table-bordered">
+                        <thead style="color: black">
+                            <tr>
+                                <th scope="row">ID</th>
+                                <th scope="row">Tên danh mục sản phẩm</th>
+                                <th scope="row">Mô tả</th>
+                                <th scope="row">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.CatId</th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CatName)
+                                        </td>
+                                        <td width="200px">
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+
+                                        <td>
+                                            <a class="btn btn-inverse-primary m-r-5" asp-action="Edit" asp-route-id="@item.CatId"><i class="mdi mdi-table-edit"></i></a> |
+                                            <a class="btn btn-inverse-success m-r-5" asp-action="Details" asp-route-id="@item.CatId"><i class="mdi mdi-file-document-box"></i></a> |
+                                            <a class="btn btn-inverse-danger m-r-5" asp-action="Delete" asp-route-id="@item.CatId"> <i class="mdi mdi-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

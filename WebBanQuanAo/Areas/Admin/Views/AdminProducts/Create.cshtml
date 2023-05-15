@@ -1,0 +1,106 @@
+﻿@model WebBanQuanAo.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminProducts" asp-action="Index" style='color:blueviolet'>Sản phẩm</a>
+                <span class="breadcrumb-item active">Tạo mới sản phẩm</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-10 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="card-title" style="color: black; text-align: center">Tạo mới sản phẩm</h4>
+                            <form asp-controller="AdminProducts" asp-action="Create" method="post" enctype="multipart/form-data">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="ProductName" class="control-label">Tên sản phẩm</label>
+                                    <input asp-for="ProductName" class="form-control" placeholder="Nhập tên sản phẩm" required />
+                                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Description" class="control-label">Mô tả</label>
+                                    <textarea rows="5" asp-for="Description" class="form-control" placeholder="Nhập mô tả" required></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ShortDesc" class="control-label">Mô tả ngắn</label>
+                                    <input asp-for="ShortDesc" class="form-control" placeholder="Nhập mô tả ngắn" required />
+                                    <span asp-validation-for="ShortDesc" class="text-danger"></span>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="form-group col-4">
+                                        <label asp-for="CatId" class="control-label">Danh mục</label>
+                                        <select asp-for="CatId" class="form-control" asp-items="ViewBag.DanhMuc" style="min-width: 200px; height:30px" required>
+                                            <option value="" selected>Chọn danh mục sản phẩm</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label asp-for="BrandId" class="control-label">Thương hiệu</label>
+                                        <select asp-for="BrandId" class="form-control" asp-items="ViewBag.ThuongHieu" required>
+                                            <option value="" selected>Chọn thương hiệu</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <label asp-for="GenderId" class="control-label">Giới tính</label>
+                                        <select asp-for="GenderId" class="form-control" asp-items="ViewBag.GioiTinh" required>
+                                            <option value="" selected>Chọn giới tính</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label asp-for="Price" class="control-label">Giá bán</label>
+                                        <input asp-for="Price" class="form-control" placeholder="Nhập giá bán" required />
+                                        <span asp-validation-for="Price" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label asp-for="Amount" class="control-label">Số lượng</label>
+                                        <input asp-for="Amount" class="form-control" placeholder="Nhập số lượng" required />
+                                        <span asp-validation-for="Amount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Thumb" class="control-label">Ảnh đại diện</label>
+                                    <div>
+                                        <input asp-for="Thumb" name="fThumb" type="file" class="form-control-file" />
+                                    </div>
+                                    <span asp-validation-for="Thumb" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <input type="checkbox" @Html.CheckBox("Active")
+                                    <label>Trạng thái</label>
+
+                                </div>
+                                <div class="form-group" style="text-align:center">
+                                    <div class="template-demo mt-2">
+                                        <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                                            <i class="mdi mdi-folder-plus btn-icon-prepend"></i> Tạo mới
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

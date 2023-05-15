@@ -1,0 +1,49 @@
+﻿@model WebBanQuanAo.Models.Brand
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminBrands" asp-action="Index" style='color:blueviolet'>Thương hiệu</a>
+                <span class="breadcrumb-item active">Xóa thương hiệu</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-8 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 style="color: black">Xác nhận xóa thương hiệu?</h4>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>ID:</td>
+                                <td>@Model.BrandId</td>
+                            </tr>
+                            <tr>
+                                <td>Tên thương hiệu:</td>
+                                <td>@Model.BrandName</td>
+                            </tr>                  
+                        </tbody>
+                    </table>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="BrandId" />
+                        <div class="form-group" style="text-align:center">
+                            <div class="template-demo mt-2">
+                                <button type="submit" class="btn btn-inverse-danger btn-icon-text">
+                                    <i class="mdi mdi-alert btn-icon-prepend"></i> Xóa
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

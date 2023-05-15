@@ -1,0 +1,85 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<WebBanQuanAo.Models.Order>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách đơn hàng" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <span class="breadcrumb-item active">Danh sách tài khoản</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Họ và tên</th>
+                                <th scope="col">Ngày đặt</th>
+                               
+                                <th scope="col">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.OrderId</th>
+                                        <td width="50px">
+                                            @Html.DisplayFor(modelItem => item.Account.FullName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreateDate)
+                                        </td>
+                                        @*<td>
+                                                @item.TransactStatus.Status
+                                            </td>*@
+                                        <td style="text-align:center">
+                                            <a class="btn btn-inverse-primary m-r-5" asp-action="Edit" asp-route-id="@item.OrderId"><i class="mdi mdi-table-edit"></i></a> |
+                                            <a class="btn btn-inverse-success m-r-5" asp-action="Details" asp-route-id="@item.OrderId"><i class="mdi mdi-file-document-box"></i></a> |
+                                            <a class="btn btn-inverse-danger m-r-5" asp-action="Delete" asp-route-id="@item.OrderId"> <i class="mdi mdi-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table><nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <pager class="paper-container" list="@Model" asp-area="Admin" asp-controller="AdminOrders" asp-route-CatID="@ViewBag.CurrentCateID" asp-action="Index" />
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $('#modal-header').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var url = button.attr("href");
+            var modal = $(this);
+            // note that this will replace the content of modal-content ever time the modal is opened
+            modal.find('.modal-content').load(url);
+        });
+    </script>
+
+}

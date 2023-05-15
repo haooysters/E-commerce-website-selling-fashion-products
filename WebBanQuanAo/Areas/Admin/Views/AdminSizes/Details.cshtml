@@ -1,0 +1,43 @@
+﻿@model WebBanQuanAo.Models.Size
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminSizes" asp-action="Index" style='color:blueviolet'>Kích cỡ</a>
+                <span class="breadcrumb-item active">Chi tiết kích cỡ</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-8 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title" style="color: black">Thông tin kích cỡ</h4>
+                    <table class="table">
+                        <tbody style="color: black">
+                            <tr>
+                                <td>ID:</td>
+                                <td>@Model.SizeId</td>
+                            </tr>
+                            <tr>
+                                <td>Tên kích cỡ:</td>
+                                <td>@Model.SizeName</td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả:</td>
+                                <td>@Model.Description</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

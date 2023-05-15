@@ -1,0 +1,52 @@
+﻿@model WebBanQuanAo.Models.Role
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminRoles" asp-action="Index" style='color:blueviolet'>Quyền truy cập</a>
+                <span class="breadcrumb-item active">Xóa quyền truy cập</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-8 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 style="color: black">Xác nhận xóa sản phẩm truy cập?</h4>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>ID:</td>
+                                <td>@Model.RoleId</td>
+                            </tr>
+                            <tr>
+                                <td>Tên quyền truy cập:</td>
+                                <td>@Model.RoleName</td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả:</td>
+                                <td>@Model.Description</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="RoleId" />                        
+                        <div class="form-group" style="text-align:center">
+                            <div class="template-demo mt-2">                               
+                                <button type="submit" class="btn btn-inverse-danger btn-icon-text">
+                                    <i class="mdi mdi-alert btn-icon-prepend"></i> Xóa
+                                </button>
+                            </div>
+                        </div>
+                    </form>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

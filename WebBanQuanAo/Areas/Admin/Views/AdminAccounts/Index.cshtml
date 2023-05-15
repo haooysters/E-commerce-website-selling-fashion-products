@@ -1,0 +1,145 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<WebBanQuanAo.Models.Account>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách tài khoản" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="btn-group-vertical" role="group" aria-label="Basic example">
+    <div class="btn-group">
+        <select class="custom-select" id="txtCatID" name="txtCatID" style="min-width: 200px; height:30px" asp-items="ViewBag.Quyen">
+            <option selected>Chọn danh mục</option>
+            <option value="0">Chọn tất cả</option>
+        </select>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <span class="breadcrumb-item active">Danh sách tài khoản</span>
+            </nav>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Họ và tên</th>
+                                <th scope="col">Quyền truy cập</th>
+                                <th scope="col">Trạng thái</th>
+
+                                <th scope="col">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null) 
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.AccountId</th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FullName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Role.RoleName)
+                                        </td>
+                                        <td>
+                                                @if (item.Active == true)
+                                                {
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="badge badge-success badge-dot r-m-10"></div>
+                                                        <div>Active</div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="badge badge-success badge-dot r-m-10"></div>
+                                                        <div>Block</div>
+                                                    </div>
+                                                }
+
+                                            </td>
+                                        <td>
+                                            <a class="btn btn-inverse-primary m-r-5" asp-action="Edit" asp-route-id="@item.AccountId"><i class="mdi mdi-table-edit"></i></a> |
+                                            <a class="btn btn-inverse-success m-r-5" asp-action="Details" asp-route-id="@item.AccountId"><i class="mdi mdi-file-document-box"></i></a> |
+                                            <a class="btn btn-inverse-danger m-r-5" asp-action="Delete" asp-route-id="@item.AccountId"> <i class="mdi mdi-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <pager class="paper-container" list="@Model" asp-area="Admin" asp-controller="AdminAccounts" asp-route-CatID="@ViewBag.CurrentCateID" asp-action="Index" />
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            jQuery("#txtCatID").change(function () {
+                var catID = jQuery(this).children(":selected").attr("value");
+                catID = parseFloat(catID);
+                $('#txtCatID option')
+                    .removeAttr('selected');
+                $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
+                $.ajax({
+                    url: '/Admin/AdminAccounts/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        CatID: catID
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                $.ajax({
+                    url: '/Admin/Search/FindProduct/',
+                    datatype: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+
+    </script>
+}

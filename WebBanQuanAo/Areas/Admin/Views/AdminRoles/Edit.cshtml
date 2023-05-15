@@ -1,0 +1,54 @@
+﻿@model WebBanQuanAo.Models.Role
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminRoles" asp-action="Index" style='color:blueviolet'>Quyền truy cập</a>
+                <span class="breadcrumb-item active">Chỉnh sửa quyền truy cập</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-7 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col">
+                        <h4 class="card-title" style="color: black; text-align: center">Chỉnh sửa thông tin quyền truy cập</h4>
+                        <form asp-action="Edit" asp-route-id="@Model.RoleId">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="RoleId" />
+                            <div class="form-group">
+                                <label asp-for="RoleName" class="control-label">Tên quyền truy cập</label>
+                                <input asp-for="RoleName" class="form-control" required />
+                                <span asp-validation-for="RoleName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label">Mô tả</label>
+                                <input asp-for="Description" class="form-control"/>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group" style="text-align:center">
+                                <div class="template-demo mt-2">
+                                    <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                                        <i class="mdi mdi-file-check btn-icon-prepend"></i> Lưu
+                                    </button>
+                                    <button type="reset" class="btn btn-outline-warning btn-icon-text">
+                                        <i class="mdi mdi-reload btn-icon-prepend"></i> Trở lại
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

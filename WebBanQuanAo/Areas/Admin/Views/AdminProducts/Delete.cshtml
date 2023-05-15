@@ -1,0 +1,73 @@
+﻿@model WebBanQuanAo.Models.Product
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminProducts" asp-action="Index" style='color:blueviolet'>Sản phẩm</a>
+                <span class="breadcrumb-item active">Xóa sản phẩm</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-10 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 style="color: black">Xác nhận xóa sản phẩm?</h4>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td width="150">ID:</td>
+                                <td>@Model.ProductId</td>
+                            </tr>
+                            <tr>
+                                <td>Tên sản phẩm:</td>
+                                <td>@Model.ProductName</td>
+                            </tr>
+                            <tr>
+                                <td>Danh mục:</td>
+                                <td>@Model.Cat.CatName</td>
+                            </tr>
+                            <tr>
+                                <td>Học phí:</td>
+                                <td>@Model.Price.Value.ToString("#,##0") VNĐ</td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả ngắn:</td>
+                                <td>@Model.ShortDesc</td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả:</td>
+                                <td><textarea rows="5" style="width:500px" readonly>@Model.Description</textarea> </td>
+                            </tr>
+                            <tr>
+                                <td>Hình ảnh:</td>
+                                <td>@Model.Thumb</td>
+                            </tr>
+                            <tr>
+                                <td>Trạng thái:</td>
+                                <td>@Model.Active</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="ProductId" />
+                        <div class="form-group" style="text-align:center">
+                            <div class="template-demo mt-2">
+                                <button type="submit" class="btn btn-inverse-danger btn-icon-text">
+                                    <i class="mdi mdi-alert btn-icon-prepend"></i> Xóa
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

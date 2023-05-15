@@ -1,0 +1,75 @@
+﻿<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                    <img src="~/Adminassets/images/faces/face1.jpg" alt="profile">
+                    <span class="login-status online"></span>
+                    <!--change to offline or busy as needed-->
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                    <span class="font-weight-bold mb-2">Trần Vũ Hào</span>
+                    <span class="text-secondary text-small">Quản lý</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                <span class="menu-title">Trang chủ</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Quản lý hệ thống</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="AdminRoles" asp-action="Index">Quản lý quyền truy cập</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Index">Quản lý tài khoản</a></li>
+                </ul>
+            </div>
+        </li>
+     
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+                <span class="menu-title">Quản lý sản phẩm</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-table-large menu-icon"></i>
+
+            </a>
+            <div class="collapse" id="general-pages">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="AdminCategories" asp-action="Index"> Danh mục </a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="AdminProducts" asp-action="Index"> Sản phẩm </a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="AdminBrands" asp-action="Index"> Thương hiệu </a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="AdminSizes" asp-action="Index"> Kích cỡ </a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="AdminGenders" asp-action="Index"> Giới tính </a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Admin" asp-controller="AdminOrders" asp-action="Index">
+                <span class="menu-title">Quản lý hóa đơn</span>
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Admin" asp-controller="AdminPages" asp-action="Index">
+                <span class="menu-title">Quản lý tin tức</span>
+                <i class="mdi mdi-medical-bag menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Admin" asp-controller="AdminThongKe" asp-action="Index">
+                <span class="menu-title">Quản lý thống kê</span>
+                <i class="mdi mdi-chart-bar menu-icon"></i>
+            </a>
+        </li>
+
+
+    </ul>
+</nav>

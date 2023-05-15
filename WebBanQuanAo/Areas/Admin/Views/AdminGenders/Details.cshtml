@@ -1,0 +1,39 @@
+﻿@model WebBanQuanAo.Models.Gender
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminGenders" asp-action="Index" style='color:blueviolet'>Giới tính</a>
+            <span class="breadcrumb-item active">Chi tiết giới tính</span>
+        </nav>
+    </div>
+</div>
+<div class="page-header">
+    <div class="col-lg-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="color: black">Thông tin giới tính</h4>
+                <table class="table">
+                    <tbody style="color: black">
+                        <tr>
+                            <td>ID:</td>
+                            <td>@Model.GenderId</td>
+                        </tr>
+                        <tr>
+                            <td>Tên giới tính:</td>
+                            <td>@Model.GenderName</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

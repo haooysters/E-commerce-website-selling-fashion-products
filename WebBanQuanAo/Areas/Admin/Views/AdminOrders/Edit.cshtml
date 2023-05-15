@@ -1,0 +1,68 @@
+﻿@model WebBanQuanAo.Models.Order
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" style='color:blueviolet'>Đơn hàng</a>
+                <span class="breadcrumb-item active">Cập nhật trạng thái</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-7 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col">
+                        <h4 class="card-title" style="color: black; text-align: center"hàng>Cập nhật trạng thái đơn hàng</h4>
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            @*Người dùng không chỉnh sửa tự động lấy lại giá trị cũ*@
+                            <input type="hidden" asp-for="OrderId" />
+                            <input type="hidden" asp-for="AccountId" />
+                            <input type="hidden" asp-for="TotalMoney" />
+                            <input type="hidden" asp-for="CreateDate" />
+
+                            <div class="form-group">
+                                <label asp-for="TransactStatusId" class="control-label">Trạng thái đơn hàng</label>
+                                <select asp-for="TransactStatusId" class="form-control" asp-items="ViewBag.TrangThai" style="height:40px" required>
+                                    <option value="" disabled selected>Chọn trạng thái</option>
+                                </select>
+                            </div>                         
+
+                            <div class="form-group">
+
+                                <input type="checkbox" @Html.CheckBox("Paid")
+                                <label>Trạng thái thanh toán</label>
+
+                            </div>
+
+                            <div class="form-group" style="text-align:center">
+                                <div class="template-demo mt-2">
+                                    <button type="submit" class="btn btn-outline-primary btn-icon-text">
+                                        <i class="mdi mdi-file-check btn-icon-prepend"></i> Lưu
+                                    </button>
+                                    <button type="reset" class="btn btn-outline-warning btn-icon-text">
+                                        <i class="mdi mdi-reload btn-icon-prepend"></i> Trở lại
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,134 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<WebBanQuanAo.Models.Page>
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    int PageNext = CurrentPage + 1;
+    ViewData["Title"] = "Index" + CurrentPage;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/blog/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/blog/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/blog/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/blog/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/blog/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/blog/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/blog/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/blog/css/style.css" type="text/css">
+</head>
+
+<body>
+
+
+
+
+
+    <!-- Breadcrumb Section End -->
+    <!-- Blog Section Begin -->
+    <section class="blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-7">
+                        <div class="row">
+                            @if (Model != null && Model.Count() > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    string url = $"/tin-tuc/{item.Title}-{item.PageId}.html";
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="blog__item">
+                                            <div class="blog__item__pic">
+                                                <a href="@url"><img href="@url" src="images/pages/@item.Thumb" alt=""></a>
+                                            </div>
+                                            <div class="blog__item__text">
+                                                <ul>
+                                                    <li><i class="fa fa-calendar-o"></i> @item.CreateDate</li>
+                                                    <li><i class="fa fa-comment-o"></i> 5</li>
+                                                </ul>
+                                                <h5><a href="@url">@item.Title</a></h5>
+                                                <p>
+                                                    @item.AuthorName
+                                                </p>
+                                                <a href="@url" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+
+                            <div class="col-lg-12">
+                                <div class="pagination-area pt-10">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-center">
+                                            @if (CurrentPage > 1)
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/blogs.html?page=@(CurrentPage - 1)" aria-label="Previous">
+                                                        <span class="fa fa-chevron-left"></span>
+                                                    </a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/blogs.html" aria-label="Previous">
+                                                        <span class="fa fa-chevron-left"></span>
+                                                    </a>
+                                                </li>
+                                            }
+
+                                            <li class="page-item active"><a class="page-link" href="/blogs.html?page=@CurrentPage">@CurrentPage</a></li>
+                                            <li class="page-item"><a class="page-link" href="/blogs.html?page=@PageNext">@PageNext</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/blogs.html?page=@PageNext" aria-label="Next">
+                                                    <span class="fa fa-chevron-right"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+    <!-- Js Plugins -->
+    <script src="~/blog/js/jquery-3.3.1.min.js"></script>
+    <script src="~/blog/js/bootstrap.min.js"></script>
+    <script src="~/blog/js/jquery.nice-select.min.js"></script>
+    <script src="~/blog/js/jquery-ui.min.js"></script>
+    <script src="~/blog/js/jquery.slicknav.js"></script>
+    <script src="~/blog/js/mixitup.min.js"></script>
+    <script src="~/blog/js/owl.carousel.min.js"></script>
+    <script src="~/blog/js/main.js"></script>
+
+    <link href="~/blog/css/bootstrap.min.css" rel="stylesheet" />
+
+</body>
+
+</html>
+
+@*<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <pager class="paper-container" list="@Model" asp-controller="Blog" asp-route-CatID="@ViewBag.CurrentCateID" asp-action="Index" />
+    </ul>
+</nav>*@

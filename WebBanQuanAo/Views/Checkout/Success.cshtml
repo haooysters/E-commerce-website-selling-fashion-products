@@ -1,0 +1,61 @@
+﻿@model WebBanQuanAo.ModelViews.MuaHangSuccessVM
+
+@{
+    ViewData["Title"] = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <style type="text/css">
+        .nice-select .list {
+            border-radius: 0px;
+            overflow-y: auto;
+            overflow: hidden;
+            max-height: 200px;
+            overflow-y: scroll;
+        }
+
+        .nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {
+            color: red;
+            background: none;
+        }
+    </style>
+}
+
+
+<br />
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style="color: black">ĐẶT HÀNG THÀNH CÔNG</h4>
+                        <p>Mã đơn hàng: #@Model.DonHangID</p>
+                        <p>Cảm ơn bạn đã mua hàng!</p>
+                        <h4 class="card-title" style="color: black">THÔNG TIN ĐƠN HÀNG</h4>
+                        <table class="table">
+                            <tbody style="color: black">
+
+                                <tr>
+                                    <td>Người nhận hàng:</td>
+                                    <td>@Model.FullName</td>
+                                </tr>
+                                <tr>
+                                    <td>Số điện thoại:</td>
+                                    <td>@Model.Phone</td>
+                                </tr>
+                                <tr>
+                                    <td>Địa chỉ:</td>
+                                    <td>@Model.Address</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        Để xem chi tiết đơn hàng vui lòng truy cập vào <a asp-controller="Accounts" asp-action="Dashboard"><strong>Tài khoản cá nhân.</strong></a> Cần hỗ trợ? Liên hệ với chúng tôi qua số điện thoại 0945885570.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />

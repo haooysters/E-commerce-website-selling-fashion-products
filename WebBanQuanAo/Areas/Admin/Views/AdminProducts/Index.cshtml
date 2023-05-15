@@ -1,0 +1,124 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<WebBanQuanAo.Models.Product>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Index" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <span class="breadcrumb-item active">Sản phẩm</span>
+            </nav>
+        </div>
+    </div>
+    @*<div class="btn-group-vertical" role="group" aria-label="Basic example">
+        <div class="btn-group">
+            <select class="custom-select" id="txtCatID" name="txtCatID" style="min-width: 200px; height:30px" asp-items="@ViewBag.DanhMuc">
+                <option selected>Chọn danh mục</option>
+                <option value="0">Chọn tất cả</option>
+            </select>
+        </div>
+    </div>*@
+
+    <div class="page-header">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <a class="btn btn-inverse-primary btn-fw btn-md" asp-action="Create"><i class="mdi mdi-folder-plus btn-icon-append"></i>  Tạo mới</a>
+                    <table class="table table-bordered">
+                        <thead style="color: black">
+                            <tr>
+                                <th scope="row">ID</th>
+                                <th scope="row">Tên sản phẩm</th>
+                                <th scope="row">Giá bán</th>
+                                <th scope="row">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">@item.ProductId</th>
+                                        <td style="">
+                                            @Html.DisplayFor(modelItem => item.ProductName)
+                                        </td>
+                                        <td>
+                                            @item.Price.Value.ToString("#,##0") VNĐ
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-inverse-primary m-r-5" asp-action="Edit" asp-route-id="@item.ProductId"><i class="mdi mdi-table-edit"></i></a> |
+                                            <a class="btn btn-inverse-success m-r-5" asp-action="Details" asp-route-id="@item.ProductId"><i class="mdi mdi-file-document-box"></i></a> |
+                                            <a class="btn btn-inverse-danger m-r-5" asp-action="Delete" asp-route-id="@item.ProductId"> <i class="mdi mdi-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <div aria-level="Page navigation example">
+                        <ul class="pagination">
+                            <pager class="paper-container" list="@Model" asp-area="Admin" asp-controller="AdminProducts" asp-route-CatID="@ViewBag.CurrentCateID" asp-action="Index" />
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            jQuery("#txtCatID").change(function () {
+                var catID = jQuery(this).children(":selected").attr("value");
+                catID = parseFloat(catID);
+                $('#txtCatID option')
+                    .removeAttr('selected');
+                $("#txtCatID > [value=" + catID + "]").attr("selected", "true");
+                $.ajax({
+                    url: '/Admin/AdminProducts/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        CatID: catID
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                $.ajax({
+                    url: '/Admin/Search/FindProduct/',
+                    datatype: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+    </script>
+
+}

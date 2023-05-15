@@ -1,0 +1,218 @@
+﻿@model WebBanQuanAo.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Open Content -->
+<section class="bg-light">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-5 mt-5">
+                <div class="card mb-3">
+                    <img src="images/products/@Model.Thumb" alt="">
+                </div>
+                <br />
+                <div class="row">
+                    <!--Start Controls-->
+                    <div class="col-1 align-self-center">
+                        <a href="#multi-item-example" role="button" data-bs-slide="prev">
+                            <i class="text-dark fas fa-chevron-left"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </div>
+                    <!--End Controls-->
+                    <!--Start Carousel Wrapper-->
+                    <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
+                        <!--Start Slides-->
+                        <div class="carousel-inner product-links-wap" role="listbox">
+
+                            <!--First slide-->
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a href="#">
+                                            <img class="card-img img-fluid" src="assets/img/01.jpeg" alt="Product Image 1">
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="#">
+                                            <img class="card-img img-fluid" src="assets/img/02.jpeg" alt="Product Image 2">
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="#">
+                                            <img class="card-img img-fluid" src="assets/img/03.jpeg" alt="Product Image 3">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/.First slide-->
+                            <!--Second slide-->
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a href="#">
+                                            <img class="card-img img-fluid" src="assets/img/04.jpeg" alt="Product Image 4">
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="#">
+                                            <img class="card-img img-fluid" src="assets/img/05.jpeg" alt="Product Image 5">
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="#">
+                                            <img class="card-img img-fluid" src="assets/img/06.jpeg" alt="Product Image 6">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/.Second slide-->
+                    
+                        </div>
+                        <!--End Slides-->
+                    </div>
+                    <!--End Carousel Wrapper-->
+                    <!--Start Controls-->
+                    <div class="col-1 align-self-center">
+                        <a href="#multi-item-example" role="button" data-bs-slide="next">
+                            <i class="text-dark fas fa-chevron-right"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    <!--End Controls-->
+                </div>
+            </div>
+            <!-- col end -->
+            <div class="col-lg-7 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h2">@Model.ProductName</h1>
+                        <p class="h3 py-2">@Model.Price.Value.ToString("#,##0") VNĐ</p>
+                        <p class="py-2">
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-secondary"></i>
+                            <span class="list-inline-item text-dark">Xếp hạng 4.8 | 36 Bình luận</span>
+                        </p>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <h6>Thương hiệu: @Model.Brand.BrandName</h6>
+
+                            </li>
+                            <li class="list-inline-item">
+                                <p class="text-muted"><strong></strong></p>
+                            </li>
+                        </ul>
+
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <h6>Danh mục sản phẩm: @Model.Cat.CatName</h6>
+                            </li>                      
+                        </ul>
+
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <h6>Mô tả ngắn: @Model.ShortDesc</h6>
+
+                            </li>
+                            <li class="list-inline-item">
+                                <p class="text-muted"><strong></strong></p>
+                            </li>
+                        </ul>
+                       
+
+                        <h6>Mô tả sản phẩm:</h6>
+                        <textarea style="width:600px" rows="6" readonly>@Model.Description</textarea>
+
+                        <br />
+
+                        <form asp-action="AddToCart" asp-controller="Cart" asp-route-id="@Model.ProductId">
+                            <input type="hidden" name="product-title" value="Activewear">
+                            <br />
+                            <div class="row">
+                                <div class="col-auto">
+                                    <h6>Kích cỡ:</h6>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <select class="form-select" required="required" id="idsize" name="idsize" asp-items="@ViewBag.Size">
+                                                <option value="0" disabled selected>Chọn kích cỡ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <h6>Số lượng:</h6>
+                                    <div class="input-group mb-1" style="max-width: 70px;">
+                                        <input type="number" class="form-control text-center" value="1" id="idsize" name="SoLuong" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-auto">
+                                </div>
+                                <div class="col-auto">
+                                        <br/>
+                                        <div class="col-12" style="text-align:center">
+                                            <button class="btn btn-success btn-lg" data-id="@Model.ProductId">Thêm giỏ hàng</button>
+                                        </div>
+                                   
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Close Content -->
+<!-- Start Article -->
+<!-- End Article -->
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".ajax-add-to-cart").click(function () {
+                var input = $("#idsize").val();
+                var input1 = $("#SoLuong").val();
+                $.ajax({
+                    url: "/Cart/AddToCart",
+                    data: {
+                        id: $(this).data("id"),
+                        idsize: input,
+                        SoLuong: input1,
+                        type: "ajax"
+                    },
+                    success: function (data) {
+                        Swal.fire({
+                            icon: 'success',
+                            text: 'Thêm giỏ hàng thành công!',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                        console.log(data.soLuong);
+                        $("#cart_count").html(data.soLuong);
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Thêm giỏ hàng thất bại',
+                            text: 'Vui lòng thử lại',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

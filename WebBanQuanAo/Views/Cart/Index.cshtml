@@ -1,0 +1,170 @@
+﻿@model IEnumerable<WebBanQuanAo.ModelViews.CartItem>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5" style="text-align: center;">
+            @if (Model != null && Model.Count() > 0)
+            {
+                <form class="col-md-12" method="post">
+                    <div class="site-blocks-table">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="product-name">Hình ảnh</th>
+                                    <th class="product-name">Sản phẩm</th>
+                                    <th class="product-price">Giá bán</th>
+                                    <th class="product-quantity">Kích cỡ</th>
+                                    <th class="product-quantity">Số lượng</th>
+
+                                    <th class="product-total">Thành tiền</th>
+                                    <th class="product-remove">Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="product-thumbnail">
+                                            <a href="javascript:void(0)">
+                                                <img height="80" width="80" src="~/images/products/@item.Thumb">
+                                            </a>
+                                        </td>
+                                        <td class="product-name">
+                                            <h2 class="h5 text-black">@item.ProductName</h2>
+                                        </td>
+                                        <td>@item.Price.ToString("#,##") VNĐ</td>
+                                        <td class="product-name">
+                                            <h2 class="h5 text-black">@item.SizeName</h2>
+                                        </td>
+                                        <td class="col-md-2">
+                                            <div class="col-md-3">
+                                                <input data-mahh="@item.ProductID" data-makc="@item.SizeID" data-dongia="@item.Price" style="text-align:center" class="cartItem cart-plus-minus-box" value="@item.SoLuong" min="1" type="number">
+                                            </div>
+                                        </td>
+
+                                        <td>@item.ThanhTien.ToString("#,##") VNĐ</td>
+                                        <td><a data-mahh="@item.ProductID" data-makc="@item.SizeID" class="removecart btn btn-success btn-sm">X</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <h5>Chưa có sản phẩm nào trong giỏ hàng!</h5>
+            }
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 pl-5">
+                <div class="row justify-content-end">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-12 text-right border-bottom mb-5">
+                                <h3 class="text-black h4 text-uppercase">Tổng đơn hàng</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <span class="text-black">Thành tiền:</span>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong class="text-black">@Model.Sum(x => x.ThanhTien).ToString("#,##") VNĐ</strong>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    @if (Model != null && Model.Count() > 0)
+                                    {
+                                        <a class="btn btn-success m-r-5" href="/checkout.html">Thanh Toán</a>
+                                        <a class="btn btn-dark m-r-5" href="shop.html">Tiếp tục mua sắm!!</a>
+
+                                    }
+                                    else
+                                    {
+                                        //Khi giỏ hàng trống
+                                        <a class="btn btn-success m-r-5" href="shop.html">Đi Mua Sắm!</a>
+                                    }
+                                }
+                                else
+                                {
+                                    <a href="/dang-nhap.html?returnUrl=/checkout.html" class="btn btn-secondary btn-primary-hover">Thanh toán</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+@section Scripts{
+
+    <script>
+        $(function () {
+            function loadHeaderCart() {
+
+            }
+            $(".removecart").click(function () {
+                var productid = $(this).attr("data-mahh");
+                var sizeid = $(this).attr("data-makc");
+                $.ajax({
+                    url: "api/cart/remove",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        productID: productid,
+                        sizeID: sizeid
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            loadHeaderCart();//Reload lai gio hang
+                            location.reload();
+                        }
+
+                    },
+                    error: function (rs) {
+                        alert("Remove Cart Error !")
+                    }
+                });
+            });
+            $(".cartItem").click(function () {
+                var productid = $(this).attr("data-mahh");
+                var sizeid = $(this).attr("data-makc");
+                var soluong = parseInt($(this).val());
+                $.ajax({
+                    url: "api/cart/update",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        productID: productid,
+                        sizeID: sizeid,
+                        amount: soluong
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            loadHeaderCart();//Reload lai gio hang
+                            window.location = 'cart.html';
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Cập nhật Cart Error !")
+                    }
+                });
+            });
+        });
+    </script>
+}

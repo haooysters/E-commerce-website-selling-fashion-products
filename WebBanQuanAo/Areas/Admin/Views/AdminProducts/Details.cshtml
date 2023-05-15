@@ -1,0 +1,72 @@
+﻿@model WebBanQuanAo.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminProducts" asp-action="Index" style='color:blueviolet'>Sản phẩm</a>
+                <span class="breadcrumb-item active">Chi tiết sản phẩm</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-10 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title" style="color: black">Thông tin sản phẩm</h4>
+                    <table class="table">
+                        <tbody style="color: black">
+                            <tr>
+                                <td width="150">ID:</td>
+                                <td>@Model.ProductId</td>
+                            </tr>
+                            <tr>
+                                <td>Tên sản phẩm:</td>
+                                <td>@Model.ProductName</td>
+                            </tr>
+                            <tr>
+                                <td>Danh mục:</td>
+                                <td>@Model.Cat.CatName</td>
+                            </tr>
+                            <tr>
+                                <td>Giá bán:</td>
+                                <td>@Model.Price.Value.ToString("#,##0") VNĐ</td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả ngắn:</td>
+                                <td>@Model.ShortDesc</td>
+                            </tr>
+                            <tr>
+                                <td>Mô tả:</td>
+                                <td><textarea rows="5" style="width:500px" readonly>@Model.Description</textarea> </td>
+                            </tr>
+                            <tr>
+                                <td>Hình ảnh:</td>
+                                <td><img style="width:100px; height:80px" src="~/images/products/@Model.Thumb" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ngày tạo:</td>
+                                <td>@Model.CreateDate</td>
+                            </tr>
+                            <tr>
+                                <td>Ngày chỉnh sửa:</td>
+                                <td>@Model.ModifiedDate</td>
+                            </tr>
+                            <tr>
+                                <td>Trạng thái:</td>
+                                <td>@Model.Active</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

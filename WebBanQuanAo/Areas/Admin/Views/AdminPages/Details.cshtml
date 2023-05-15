@@ -1,0 +1,55 @@
+﻿@model WebBanQuanAo.Models.Page
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="mdi mdi-home" style='color:blueviolet'></i></a>
+                <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminPages" asp-action="Index" style='color:blueviolet'>Tin tức</a>
+                <span class="breadcrumb-item active">Chi tiết tin tức</span>
+            </nav>
+        </div>
+    </div>
+    <div class="page-header">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title" style="color: black">Thông tin tin tức</h4>
+                    <table class="table">
+                        <tbody style="color: black">
+                            <tr>
+                                <td>ID:</td>
+                                <td>@Model.PageId</td>
+                            </tr>
+                            <tr>
+                                <td>Tên tin tức:</td>
+                                <td>@Model.Title</td>
+                            </tr>
+                            <tr>
+                                <td>Tên tác giả:</td>
+                                <td>@Model.AuthorName</td>
+                            </tr>
+                            <tr>
+                                <td>Nội dung:</td>
+                                <td><textarea rows="5" style="width:700px" readonly>@Model.Contents</textarea></td>
+                            </tr>
+                            <tr>
+                                <td>Hình ảnh:</td>
+                                <td><img width="2000" height="2000" src="~/images/pages/@Model.Thumb" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ngày tạo:</td>
+                                <td>@Model.CreateDate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
